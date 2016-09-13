@@ -8,6 +8,25 @@ app.use('/assets',              express.static('assets'));
 app.use('/app',                 express.static('app'));
 app.use('/views',               express.static('views'));
 
+app.get('/api/token/:code', function(req, res) {
+    //call github api for token
+    request.post({
+        uri: 'https://github.com/login/oauth/access_token',
+        form: {
+            client_id:      '',
+            client_secret:  '',
+            code:           req.params.code
+        },
+        json: true
+    }, function(err, httpResponse, body) {
+        if (err) {
+            res.send(500, { error: err });
+            return;
+        }
+        res.send(body);
+    });
+});
+
 app.all('/*', function(req, res) {
     res.sendFile('app/index.html', { root: __dirname });
 });
