@@ -1,0 +1,19 @@
+{
+  "name": "gistx",
+  "version": "1.0.0",
+  "authors": [
+    "Piotr Łepkowski <piotr@webkowski.com>"
+  ],
+  "description": "Github Gist explorer browser application",
+  "main": "index.html",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "requirejs": "latest",
+    "jquery": "latest",
+    "angular": "^1.5.3",
+    "bootstrap": "^3.3.6",
+    "angular-route": "^1.5.3",
+    "ui-router": "^0.2.10",
+    "lodash": "^4.15.0"
+  }
+}

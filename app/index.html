@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>GistX App</title>
+        <base href="/">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+    </head>
+    <body class="ng-cloak fade-ng-cloak">
+        <div class="container-fluid" >
+            <div class="row">
+                <div class="col-xs-12">
+                    <a ui-sref="root.home">Home</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    <div ui-view="tags"></div>
+                </div>
+                <div class="col-xs-4   main" >
+                    <div ui-view="list"></div>
+                </div>
+                <div class="col-xs-6   main" >
+                    <div ui-view="content"></div>
+                </div>
+            </div>
+        </div>
+        <script data-main="/app/main" src="bower_components/requirejs/require.js"></script>
+    </body>
+</html>
