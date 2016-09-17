@@ -3,13 +3,16 @@ define('app',[
     'app-config',
     'services/auth.service',
     'services/session.service',
-    'services/authinterceptor.service'
+    'services/authinterceptor.service',
+    'components/currentuser.component'
 ],
 function (angular) {
     var app = angular.module('app',[
             'AppConfig',
             'ngRoute',
             'ui.router'
+
+
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider','$locationProvider', function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider ) {
         $locationProvider.html5Mode(true);
@@ -69,6 +72,7 @@ function (angular) {
                 //todo move to auth service
                 session.setAccessToken(token.access_token);
                 console.log('ok logged in');
+                //todo get current user save it to local storage
                 $state.go('root.home');
             });
         }else{
@@ -76,6 +80,13 @@ function (angular) {
             window.location = API.GITHUB_AUTH_URL + API.CLIENT_ID;
         }
     }])
+ /*       .component('currentUser',{
+            template: '<h3>Hello, {{ $ctrl.username }} !</h3>',
+            controller: 'CurrentUserController'
+        })
+        .controller('CurrentUserController', function($element, $attrs){
+            console.log('comp');
+        })*/
     ;
 
     function checkAccessOnStateChange($rootScope, auth, $state){
