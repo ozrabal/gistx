@@ -1,18 +1,16 @@
 define('app',[
     'angular',
+    'app-config',
     'services/auth.service',
     'services/session.service',
     'services/authinterceptor.service'
 ],
 function (angular) {
     var app = angular.module('app',[
+            'AppConfig',
             'ngRoute',
             'ui.router'
     ])
-    .constant('API', {
-        'GITHUB_AUTH_URL': 'https://github.com/login/oauth/authorize?scope=user:email gist&client_id=',
-        'CLIENT_ID': ''
-    })
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider','$locationProvider', function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider ) {
         $locationProvider.html5Mode(true);
         $stateProvider

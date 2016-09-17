@@ -1,2 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 *.map
+/app-config.json
+/app-config-secret.json
+/bower_components/
+/node_modules/
+/app/app-config.js

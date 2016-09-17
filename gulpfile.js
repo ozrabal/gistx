@@ -4,13 +4,22 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
     sass = require('gulp-sass'),
-    cleanCSS = require('gulp-clean-css'),
     rename = require("gulp-rename"),
     preprocess = require('gulp-preprocess'),
     order = require("gulp-order"),
-    concat = require('gulp-concat');
+    concat = require('gulp-concat'),
+    ngConfig = require('gulp-ng-config');
 
-gulp.task('start', function () {
+//generate config angular module
+gulp.task('config', function () {
+    gulp.src('app-config.json')
+        .pipe(ngConfig('AppConfig',{
+            wrap: 'define(["angular"], function () {\n return <%= module %> \n});'
+        }))
+        .pipe(gulp.dest('app/'))
+});
+
+gulp.task('start',['config'], function () {
     nodemon({
         script: 'server.js',
         ext: 'js, scss',

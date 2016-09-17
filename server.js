@@ -1,5 +1,7 @@
 var express = require('express');
 var request = require('request');
+var config = require( "./app-config.json" ); //include configs
+var secret = require( "./app-config-secret.json" ); //include configs
 var app = express();
 
 app.use('/vendor',              express.static('vendor'));
@@ -11,10 +13,10 @@ app.use('/views',               express.static('views'));
 app.get('/api/token/:code', function(req, res) {
     //call github api for token
     request.post({
-        uri: 'https://github.com/login/oauth/access_token',
+        uri: config.API.GITHUB_OAUTH_TOKEN_URL,
         form: {
-            client_id:      '',
-            client_secret:  '',
+            client_id:      config.API.CLIENT_ID,
+            client_secret:  secret.API.GITHUB_CLIENT_SECRET,
             code:           req.params.code
         },
         json: true

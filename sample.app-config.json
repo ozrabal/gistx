@@ -1,0 +1,7 @@
+{
+  "API": {
+    "GITHUB_OAUTH_TOKEN_URL": "https://github.com/login/oauth/access_token",
+    "GITHUB_AUTH_URL": "https://github.com/login/oauth/authorize?scope=user:email gist&client_id=",
+    "CLIENT_ID": "YOUR_GITHUB_APP_ID"
+  }
+}
