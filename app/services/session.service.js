@@ -13,9 +13,15 @@ require(['angular', 'app', 'services/localstorage.service'], function(angular){
             setAccessToken: function (token) {
                 console.log('session token:' + token);
                 localStorage.setItem('session.accessToken', token);
+               
                 return token;
             },
-
+            setUser: function(user){
+                localStorage.setItem('user', user.name);
+            },
+            getUser: function(){
+              return localStorage.getItem('user');
+            },
             destroy: function destroy() {
                 setAccessToken(null);
             }

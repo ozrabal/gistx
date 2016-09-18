@@ -67,13 +67,20 @@ function (angular) {
         var code = $location.search().code;
         if(code){
             //exchange code to access token
-            auth.getToken(code).then( function(token) {
+            auth.getToken(code)
+            .then( function(token) {
                 //todo store in cookie
                 //todo move to auth service
                 session.setAccessToken(token.access_token);
                 console.log('ok logged in');
-                //todo get current user save it to local storage
-                $state.go('root.home');
+            })
+            .then(function(){
+            auth.getUser().then(function(user){
+                session.setUser(user);
+                //$state.go('root.home');
+                window.location = '/';
+            });
+
             });
         }else{
             //request 'code' from GitHub

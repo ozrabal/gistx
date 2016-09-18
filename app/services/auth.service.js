@@ -17,6 +17,17 @@ require(['angular', 'app',  'services/session.service'], function(angular){
 					deferred.resolve(result.data);
 					return deferred.promise;
 				});
+			},
+			getUser: function(){
+				var deferred = $q.defer();
+				return $http({
+					url: 'https://api.github.com/user',
+					method: 'GET'
+				})
+				.then(function(result){
+					deferred.resolve(result.data);
+					return deferred.promise;
+				});
 			}
 		}
 	}])
