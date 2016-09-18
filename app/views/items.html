@@ -1,1 +1,7 @@
-items
+<div class="list-group">
+    <h4>Gists</h4>
+    <a class="list-group-item" ng-repeat="item in home.gists">
+        {{item.description}}
+        created: {{item.created_at | date}}
+    </a>
+ </div>

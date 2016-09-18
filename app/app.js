@@ -4,7 +4,9 @@ define('app',[
     'services/auth.service',
     'services/session.service',
     'services/authinterceptor.service',
-    'components/currentuser.component'
+    'services/gist.service',
+    'components/currentuser.component',
+
 ],
 function (angular) {
     var app = angular.module('app',[
@@ -59,10 +61,21 @@ function (angular) {
     //check if user is authenticated
     .run(checkAccessOnStateChange)
 
-    .controller('HomeController', function(){
+    .controller('HomeController',['gist', function(gist){
         console.log('Home Ctrl');
+        var home = this;
 
-    })
+        gist.getGists().then(function(gists){
+            console.log(gists);
+            home.gists = gists;
+        })
+        //var result = gist.getGists();
+             //gists = result;
+
+
+
+
+    }])
     .controller('LoginController',['auth', '$state', '$location', 'API', 'session', function(auth, $state, $location, API, session){
         var code = $location.search().code;
         if(code){
