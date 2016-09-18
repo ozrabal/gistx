@@ -13,8 +13,6 @@ function (angular) {
             'AppConfig',
             'ngRoute',
             'ui.router'
-
-
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider','$locationProvider', function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider ) {
         $locationProvider.html5Mode(true);
@@ -54,6 +52,15 @@ function (angular) {
                     }
                 }
             })
+            .state('root.home.gist',{
+                url: 'gist/:id',
+                views: {
+                    'content@':{
+                        templateUrl: 'app/views/content.html',
+                        controller: 'GistController as gistItem'
+                    }
+                }
+            })
         ;
         $urlRouterProvider.otherwise('/');
         $httpProvider.interceptors.push('AuthInterceptor');
@@ -69,10 +76,11 @@ function (angular) {
             console.log(gists);
             home.gists = gists;
         })
-        //var result = gist.getGists();
-             //gists = result;
 
-
+    }])
+    .controller('GistController', ['gist','$stateParams',function( gist, $stateParams){
+        var gistItem = this;
+        gistItem.id = $stateParams.id;
 
 
     }])
@@ -88,12 +96,10 @@ function (angular) {
                 console.log('ok logged in');
             })
             .then(function(){
-            auth.getUser().then(function(user){
-                session.setUser(user);
-                //$state.go('root.home');
-                window.location = '/';
-            });
-
+                auth.getUser().then(function(user){
+                    session.setUser(user);
+                    window.location = '/';
+                });
             });
         }else{
             //request 'code' from GitHub

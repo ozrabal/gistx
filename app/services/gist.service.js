@@ -17,7 +17,18 @@ require([
                             return deferred.promise;
                         });
 
-                }
+                },
+               getGist: function(id){
+                   var deferred = $q.defer();
+                   return $http({
+                       url: 'https://api.github.com/gists/' + id,
+                       method: 'GET'
+                   })
+                       .then(function (result) {
+                           deferred.resolve(result.data);
+                           return deferred.promise;
+                       });
+               }
 
            }
        }])
